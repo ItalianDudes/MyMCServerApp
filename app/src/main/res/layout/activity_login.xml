@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentStart="true"
+        android:id="@+id/loginAppTitle"/>
+
+    <!--TODO: remember input filter-->
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_below="@id/loginAppTitle"
+        android:layout_marginTop="50dp"
+        android:stretchColumns="*"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <TableRow
+            android:gravity="center_horizontal">
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/string_title_login"
+                android:textSize="25sp"
+                android:textAlignment="center"/>
+        </TableRow>
+
+        <TableRow
+            android:gravity="center_horizontal">
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/string_form_ip"
+                android:textSize="20sp"
+                android:layout_column="0"
+                android:textAlignment="center"/>
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/string_form_port"
+                android:textSize="20sp"
+                android:layout_column="1"
+                android:textAlignment="center"/>
+        </TableRow>
+        <TableRow
+            android:gravity="center_horizontal">
+            <EditText
+                android:background="@drawable/edtext_login_back_sel"
+                android:hint="@string/string_login_form_ip_example"
+                android:textAlignment="textEnd"
+                android:padding="5dp"
+                android:id="@+id/login_form_ip"/>
+
+            <EditText
+                android:layout_width="22dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/edtext_login_back_sel"
+                android:hint="@string/string_login_form_port_example"
+                android:inputType="number"
+                android:padding="5dp"
+                android:textAlignment="textEnd"
+                android:id="@+id/login_form_port"/>
+        </TableRow>
+        <TableRow
+            android:gravity="center_horizontal">
+            <TextView
+                android:textAlignment="center"
+                android:text="@string/string_form_user"
+                android:textSize="20sp"
+                />
+        </TableRow>
+        <TableRow
+            android:gravity="center">
+            <EditText
+                android:background="@drawable/edtext_login_back_sel"
+                android:padding="5dp"
+                android:hint="@string/string_login_form_user_example"
+                android:textAlignment="center"
+                android:id="@+id/login_form_user"/>
+        </TableRow>
+        <TableRow
+            android:gravity="center_horizontal">
+            <TextView
+                android:textAlignment="center"
+                android:text="@string/string_form_pwd"
+                android:textSize="20sp"/>
+        </TableRow>
+        <TableRow
+            android:gravity="center_horizontal">
+            <EditText
+                android:background="@drawable/edtext_login_back_sel"
+                android:padding="5dp"
+                android:textAlignment="center"
+                android:inputType="textPassword"
+                android:id="@+id/login_form_pwd"/>
+        </TableRow>
+        <TableRow
+            android:gravity="center_horizontal">
+            <Button
+                android:text="@string/string_form_btn_login"
+                android:onClick="logIn"/>
+        </TableRow>
+    </TableLayout>
+
+</RelativeLayout>

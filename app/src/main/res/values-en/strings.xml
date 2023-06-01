@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="string_form_port">Port</string>
+
+    <string name="string_login_form_port_example" translatable="true">25545 (optional)</string>
+
+    <string name="string_error_login" translatable="true">A mistake might have occurred during the communication with the server</string>
+</resources>
