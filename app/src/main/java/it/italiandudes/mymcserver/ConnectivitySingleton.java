@@ -1,5 +1,8 @@
 package it.italiandudes.mymcserver;
 
+import android.util.Log;
+
+import org.apache.commons.codec.digest.DigestUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -42,7 +45,7 @@ public class ConnectivitySingleton {
      * */
     public void setURL(String ip, int port){
         url = Constants.Connectivity.HTTP+ip+":"+port;
-        System.out.println("Indirizzo URL: "+url);
+        Log.d(Constants.Log.TAG,"Indirizzo URL: "+url);
     }
 
     /**
@@ -50,7 +53,7 @@ public class ConnectivitySingleton {
      * */
     public void setPath(String path){
         urlPath = url+"/"+path;
-        System.out.println("Indirizzo URL completo: "+urlPath);
+        Log.d(Constants.Log.TAG,"Indirizzo URL completo: "+urlPath);
     }
 
     /**
@@ -86,13 +89,17 @@ public class ConnectivitySingleton {
         HttpURLConnection http = (HttpURLConnection)url.openConnection();
 
         http.setRequestMethod("GET");
+        Log.d(Constants.Log.TAG,"HeaderList: "+((headerList==null)?"null":headerList));
         if(headerList!=null){
             for(HTTPHeader header : headerList){
+                Log.d(Constants.Log.TAG,header.toString());
                 http.setRequestProperty(header.getKey(),header.getValue());
             }
         }
 
+        Log.d(Constants.Log.TAG,"Bella");
         InputStream in = http.getInputStream();
+        Log.d(Constants.Log.TAG,"Bella 2");
         BufferedReader br = new BufferedReader(new InputStreamReader(in));
         String line;
         StringBuilder risposta_builder = new StringBuilder("");
@@ -101,6 +108,7 @@ public class ConnectivitySingleton {
             risposta_builder.append(line);
         }
 
+        Log.d(Constants.Log.TAG,"JSONObject risposta: \n"+risposta_builder.toString());
         risposta = new JSONObject(risposta_builder.toString());
 
         http.disconnect();
@@ -173,29 +181,9 @@ public class ConnectivitySingleton {
         return token;
     }
 
-    public void sendCommandMessageToServer(String command) throws IOException, JSONException {
-        URL url = new URL(urlPath);
-        HttpURLConnection http = (HttpURLConnection)url.openConnection();
-
-        http.setRequestMethod("GET");
-        if(headerList!=null){
-            for(HTTPHeader header : headerList){
-                http.setRequestProperty(header.getKey(),header.getValue());
-            }
-        }
-
-        InputStream in = http.getInputStream();
-        BufferedReader br = new BufferedReader(new InputStreamReader(in));
-        String line;
-        StringBuilder risposta_builder = new StringBuilder("");
-
-        while((line=br.readLine())!=null){
-            risposta_builder.append(line);
-        }
-
-        risposta = new JSONObject(risposta_builder.toString());
-
-        http.disconnect();
-        headerList.removeAll(headerList);
+    public void resetConnectionAfterFailure(){
+        headerList = new ArrayList<>();
+        url = "";
+        urlPath = "";
     }
 }

@@ -16,6 +16,8 @@ public final class Constants {
             public static final String RETURN_CODE = "return-code";
             public static final String TOKEN = "token";
             public static final String MMCS_COMMAND = "MMCS-Command";
+            public static final String MMCS_TOKEN = "MMCS-Token";
+            public static final String COMMAND_OUTPUT = "command-output";
         }
 
         public static final class General{
@@ -29,5 +31,9 @@ public final class Constants {
 
     public final static class Log{
         public static final String TAG = "MyMCServerApp-Logger";
+    }
+
+    public final static class CryptAlgorithms{
+        public static final String SHA3_512 = "sha-512";
     }
 }

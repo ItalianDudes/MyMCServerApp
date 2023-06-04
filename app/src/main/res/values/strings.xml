@@ -6,10 +6,13 @@
     <string name="string_form_user" translatable="false">User</string>
     <string name="string_form_pwd" translatable="false">Password</string>
     <string name="string_form_btn_login" translatable="false">LogIn</string>
+    <string name="string_terminal_btn_confirm" translatable="true">Conferma</string>
 
     <string name="string_login_form_ip_example" translatable="false">127.0.0.1</string>
     <string name="string_login_form_port_example" translatable="true">25545 (opzionale)</string>
     <string name="string_login_form_user_example" translatable="false">User123</string>
+    <string name="string_terminal_edTxt_example" translatable="true">Inserisci comando</string>
     
-    <string name="string_error_login" translatable="true">Probabile errore nella connessione al server</string>
+    <string name="string_error" translatable="true">Probabile errore nella connessione al server</string>
+    <string name="string_terminal_error" translatable="true">I comandi non possono essere vuoti</string>
 </resources>

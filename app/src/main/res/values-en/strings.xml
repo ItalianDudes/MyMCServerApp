@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="string_form_port">Port</string>
+    <string name="string_form_port" translatable="true">Port</string>
+    <string name="string_terminal_btn_confirm" translatable="true">Confirm</string>
 
     <string name="string_login_form_port_example" translatable="true">25545 (optional)</string>
+    <string name="string_terminal_edTxt_example" translatable="true">Type the command</string>
 
-    <string name="string_error_login" translatable="true">A mistake might have occurred during the communication with the server</string>
+    <string name="string_error" translatable="true">A mistake might have occurred during the communication with the server</string>
+    <string name="string_terminal_error" translatable="true">The commands can&apos;t be empty</string>
 </resources>

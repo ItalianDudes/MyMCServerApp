@@ -1,7 +1,5 @@
 package it.italiandudes.mymcserver.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,10 +7,12 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import it.italiandudes.mymcserver.R;
+import it.italiandudes.mymcserver.threads.ServerTerminalMessagesThread;
 
 public class TerminalActivity extends Activity {
 
@@ -37,12 +37,30 @@ public class TerminalActivity extends Activity {
     }
 
     public void printServerMessageToTerminal(String message){
-        terminalContent.add(message);
+        new Thread(()->{
+            terminalContent.add(">\t"+message);
 
-        ((ArrayAdapter<String>)terminalView.getAdapter()).notifyDataSetChanged();
+            runOnUiThread(()->{
+                ((ArrayAdapter<String>)terminalView.getAdapter()).notifyDataSetChanged();
+            });
+        }).start();
     }
 
     public void printLocalMessageToTerminal(View view){
+        new Thread(()->{
+            String message = terminalEdTxt.getText().toString();
 
+            if(message.isEmpty() || message.isBlank()){
+                runOnUiThread(()->{
+                    Toast.makeText(this,getString(R.string.string_terminal_error),Toast.LENGTH_LONG).show();
+                });
+            }else{
+                terminalContent.add(">\t"+message);
+                runOnUiThread(()->{
+                    ((ArrayAdapter<String>)terminalView.getAdapter()).notifyDataSetChanged();
+                });
+                new Thread(new ServerTerminalMessagesThread(this,message)).start();
+            }
+        }).start();
     }
 }

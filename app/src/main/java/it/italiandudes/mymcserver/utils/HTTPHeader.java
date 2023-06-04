@@ -1,5 +1,7 @@
 package it.italiandudes.mymcserver.utils;
 
+import androidx.annotation.NonNull;
+
 public class HTTPHeader {
     private String key;
     private String value;
@@ -15,5 +17,11 @@ public class HTTPHeader {
 
     public String getValue(){
         return value;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Key: \""+key+"\"\tValue: \""+value+"\"";
     }
 }
