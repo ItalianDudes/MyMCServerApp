@@ -7,6 +7,17 @@
     <string name="string_form_pwd" translatable="false">Password</string>
     <string name="string_form_btn_login" translatable="false">LogIn</string>
     <string name="string_terminal_btn_confirm" translatable="true">Conferma</string>
+    <string name="string_info_section_cpu" translatable="false">CPU</string>
+    <string name="string_info_graphs_section_cpu_free" translatable="true">CPU libera</string>
+    <string name="string_info_graphs_section_cpu_system" translatable="true">CPU occupata dal Sistema</string>
+    <string name="string_info_graphs_section_cpu_process" translatable="true">CPU occupata dal processo</string>
+    <string name="string_info_section_ram" translatable="false">RAM</string>
+    <string name="string_info_graphs_section_ram_free" translatable="true">RAM libera</string>
+    <string name="string_info_graphs_section_ram_occupied" translatable="true">RAM occupata</string>
+    <string name="string_info_graphs_section_ram_virtual_free" translatable="true">RAM virtuale libera</string>
+    <string name="string_info_graphs_section_ram_virtual_committed" translatable="true">RAM virtuale occupata</string>
+    <string name="string_info_section_players" translatable="true">GIOCATORI</string>
+    <string name="string_info_section_addons" translatable="true">ADDONS INSTALLATI</string>
 
     <string name="string_login_form_ip_example" translatable="false">127.0.0.1</string>
     <string name="string_login_form_port_example" translatable="true">25545 (opzionale)</string>
@@ -15,4 +26,5 @@
     
     <string name="string_error" translatable="true">Probabile errore nella connessione al server</string>
     <string name="string_terminal_error" translatable="true">I comandi non possono essere vuoti</string>
+    <string name="string_terminal_slash_error" translatable="true">I comandi non necessitano dello / iniziale</string>
 </resources>

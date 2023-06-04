@@ -2,10 +2,20 @@
 <resources>
     <string name="string_form_port" translatable="true">Port</string>
     <string name="string_terminal_btn_confirm" translatable="true">Confirm</string>
+    <string name="string_info_graphs_section_cpu_free" translatable="true">Free CPU</string>
+    <string name="string_info_graphs_section_cpu_system" translatable="true">CPU used by the System</string>
+    <string name="string_info_graphs_section_cpu_process" translatable="true">CPU used by the process</string>
+    <string name="string_info_graphs_section_ram_free" translatable="true">Free RAM</string>
+    <string name="string_info_graphs_section_ram_occupied" translatable="true">RAM used</string>
+    <string name="string_info_graphs_section_ram_virtual_free" translatable="true">Free virtual RAM </string>
+    <string name="string_info_graphs_section_ram_virtual_committed" translatable="true">Virtual RAM committed</string>
+    <string name="string_info_section_players" translatable="true">PLAYERS</string>
+    <string name="string_info_section_addons" translatable="true">INSTALLED ADDONS</string>
 
     <string name="string_login_form_port_example" translatable="true">25545 (optional)</string>
     <string name="string_terminal_edTxt_example" translatable="true">Type the command</string>
 
     <string name="string_error" translatable="true">A mistake might have occurred during the communication with the server</string>
-    <string name="string_terminal_error" translatable="true">The commands can&apos;t be empty</string>
+    <string name="string_terminal_error" translatable="true">The commands can\'t be empty</string>
+    <string name="string_terminal_slash_error" translatable="true">The commands don\'t need the initial /</string>
 </resources>

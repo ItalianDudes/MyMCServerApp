@@ -54,8 +54,12 @@ public class TerminalActivity extends Activity {
                 runOnUiThread(()->{
                     Toast.makeText(this,getString(R.string.string_terminal_error),Toast.LENGTH_LONG).show();
                 });
+            }else if(message.startsWith("/")){
+                runOnUiThread(()->{
+                    Toast.makeText(this,getString(R.string.string_terminal_slash_error),Toast.LENGTH_LONG).show();
+                });
             }else{
-                terminalContent.add(">\t"+message);
+                terminalContent.add(">\t/"+message);
                 runOnUiThread(()->{
                     ((ArrayAdapter<String>)terminalView.getAdapter()).notifyDataSetChanged();
                 });

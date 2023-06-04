@@ -24,6 +24,8 @@ public class ServerTerminalMessagesThread extends Thread{
 
     @Override
     public void run() {
+        super.run();
+
         ConnectivitySingleton.getInstance().setPath(Constants.Connectivity.COMMAND);
         ConnectivitySingleton.getInstance().setHTTPHeader(Constants.Protocol.HTTP_Headers.MMCS_TOKEN,ConnectivitySingleton.getInstance().getToken());
         ConnectivitySingleton.getInstance().setHTTPHeader(Constants.Protocol.HTTP_Headers.MMCS_COMMAND,message);
@@ -32,7 +34,9 @@ public class ServerTerminalMessagesThread extends Thread{
             ConnectivitySingleton.getInstance().executeQueryHTTP();
 
             if(ConnectivitySingleton.getInstance().getInteger(Constants.Protocol.HTTP_Headers.RETURN_CODE)==Constants.Protocol.ReturnCodes.HTTP_OK){
-                activity.printServerMessageToTerminal(ConnectivitySingleton.getInstance().getString(Constants.Protocol.HTTP_Headers.COMMAND_OUTPUT));
+                if(!ConnectivitySingleton.getInstance().getString(Constants.Protocol.HTTP_Headers.COMMAND_OUTPUT).isBlank()){
+                    activity.printServerMessageToTerminal(ConnectivitySingleton.getInstance().getString(Constants.Protocol.HTTP_Headers.COMMAND_OUTPUT));
+                }
             }else{
                 //Print error message
                 ConnectivitySingleton.getInstance().resetConnectionAfterFailure();
@@ -49,7 +53,5 @@ public class ServerTerminalMessagesThread extends Thread{
                 Toast.makeText(activity,activity.getString(R.string.string_error),Toast.LENGTH_LONG).show();
             });
         }
-
-        super.run();
     }
 }

@@ -3,6 +3,7 @@ package it.italiandudes.mymcserver;
 import android.util.Log;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -161,6 +162,18 @@ public class ConnectivitySingleton {
      * */
     public boolean getBoolean(String key) throws JSONException {
         return risposta.getBoolean(key);
+    }
+
+    /**
+     * getJSONArray references to the {@link JSONObject} obtained after an {@link ConnectivitySingleton#executeQueryHTTP()} and, therefore,
+     * it can throw an exception if no {@link ConnectivitySingleton#executeQueryHTTP()} has been executed before, or if that method itself failed.
+     *
+     * @param key identifies the name paired to a value.
+     * @throws JSONException this exception is thrown if there is no value paired to the given key.
+     * @return this method returns the JSONArray value paired to the given key.
+     * */
+    public JSONArray getJSONArray(String key) throws JSONException {
+        return risposta.getJSONArray(key);
     }
 
     /**

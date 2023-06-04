@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:stretchColumns="*">
     <TableRow>
 
@@ -37,14 +36,64 @@
             android:layout_height="match_parent">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <!--Inserisci i gradfici qui-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/string_info_section_cpu"
+                    android:textAlignment="center"
+                    android:textSize="25sp"
+                    android:layout_marginBottom="10dp"/>
                 <com.anychart.AnyChartView
                     android:id="@+id/cpuPieGraph"
-                    android:layout_width="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/string_info_section_ram"
+                    android:textAlignment="center"
+                    android:textSize="25sp"
+                    android:layout_marginBottom="10dp"/>
+                <com.anychart.AnyChartView
+                    android:id="@+id/ramTotalToFreePieGraph"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"/>
+                <com.anychart.AnyChartView
+                    android:id="@+id/ramCommittedPieGraph"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="25sp"
+                    android:textAlignment="center"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/string_info_section_players"/>
+                <ListView
+                    android:id="@+id/playersList"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
-                
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="25sp"
+                    android:textAlignment="center"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/string_info_section_addons"/>
+                <ListView
+                    android:id="@+id/addonsList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
             </LinearLayout>
         </ScrollView>
     </TableRow>
