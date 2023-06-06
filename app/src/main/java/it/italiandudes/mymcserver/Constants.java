@@ -8,7 +8,7 @@ public final class Constants {
         public static final String LOGIN = "login";
         public static final String COMMAND = "command";
         public static final String STATS = "stats";
-        public static final int THREAD_SLEEP_INFO = 5000;
+        public static final int THREAD_SLEEP_INFO = 10000;
     }
 
     public final static class Protocol{

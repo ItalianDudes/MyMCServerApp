@@ -2,6 +2,9 @@ package it.italiandudes.mymcserver.inputfilters;
 
 import android.text.InputFilter;
 import android.text.Spanned;
+import android.util.Log;
+
+import it.italiandudes.mymcserver.Constants;
 
 public class MinMaxStringLengthFilter implements InputFilter {
 
@@ -16,8 +19,9 @@ public class MinMaxStringLengthFilter implements InputFilter {
     @Override
     public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
         try{
-            String input = dest.toString() + source.toString();
+            String input = source.toString();
 
+            Log.d(Constants.Log.TAG,"MinMaxStringLength Filter Input: "+input);
             if(input.length()<max && input.length()>min){
                 return null;
             }

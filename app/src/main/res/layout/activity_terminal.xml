@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:stretchColumns="*">
+    android:stretchColumns="*"
+    android:background="@color/activityBack">
     <TableRow>
 
         <LinearLayout
@@ -36,10 +37,15 @@
         <ListView
             android:id="@+id/terminalView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:background="@color/terminalListBack"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"/>
     </TableRow>
     <TableRow>
         <LinearLayout
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:orientation="horizontal"
             android:weightSum="10">
             <EditText
@@ -49,7 +55,12 @@
                 android:maxLines="1"
                 android:inputType="text"
                 android:layout_weight="9"
-                android:hint="@string/string_terminal_edTxt_example"/>
+                android:padding="5dp"
+                android:layout_marginRight="5dp"
+                android:hint="@string/string_terminal_edTxt_example"
+                android:background="@drawable/edtext_login_back_sel"
+                android:textColor="@color/texts"
+                android:textColorHint="@color/hintTexts"/>
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

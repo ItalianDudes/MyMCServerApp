@@ -11,12 +11,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
 import it.italiandudes.mymcserver.utils.HTTPHeader;
+import it.italiandudes.mymcserver.utils.exceptions.ServerInterruptedException;
 
 public class ConnectivitySingleton {
 
@@ -85,7 +87,7 @@ public class ConnectivitySingleton {
      * or read the answer.
      * @throws JSONException this exception can be thrown because of instantiation problems regarding the {@link JSONObject}.
      * */
-    public void executeQueryHTTP() throws IOException, JSONException {
+    public void executeQueryHTTP() throws IOException, JSONException, ServerInterruptedException {
         URL url = new URL(urlPath);
         HttpURLConnection http = (HttpURLConnection)url.openConnection();
 
@@ -106,14 +108,23 @@ public class ConnectivitySingleton {
         StringBuilder risposta_builder = new StringBuilder("");
 
         while((line=br.readLine())!=null){
+            Log.d(Constants.Log.TAG,"Line: "+line);
             risposta_builder.append(line);
         }
 
         Log.d(Constants.Log.TAG,"JSONObject risposta: \n"+risposta_builder.toString());
+        if(risposta_builder.toString().isBlank()){
+            br.close();
+            http.disconnect();
+            Log.d(Constants.Log.TAG,"The Server has been interrupted");
+            throw new ServerInterruptedException();
+        }
+
         risposta = new JSONObject(risposta_builder.toString());
 
         http.disconnect();
         headerList.removeAll(headerList);
+        br.close();
     }
 
     /**

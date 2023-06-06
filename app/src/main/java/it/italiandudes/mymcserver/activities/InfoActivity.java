@@ -51,8 +51,10 @@ public class InfoActivity extends Activity {
         ramCommittedChart = findViewById(R.id.ramCommittedPieGraph);
         playersListView = findViewById(R.id.playersList);
         playersListView.setAdapter(new InfoPlayersListAdapter(getApplicationContext(),playersList));
+        playersListView.setBackgroundResource(R.drawable.info_list_back);
         addonsListView = findViewById(R.id.addonsList);
         addonsListView.setAdapter(new InfoAddonsListAdapter(getApplicationContext(),addonsList));
+        addonsListView.setBackgroundResource(R.drawable.info_list_back);
 
         infoThread = new ServerInfoThread(this);
         infoThread.start();
@@ -142,6 +144,14 @@ public class InfoActivity extends Activity {
     public void updateAddonsList(AddonsDataRow dataRow){
         addonsList.add(dataRow);
 
+        ((ArrayAdapter<AddonsDataRow>)addonsListView.getAdapter()).notifyDataSetChanged();
+    }
+
+    public void clearListViews(){
+        playersList.clear();
+        addonsList.clear();
+
+        ((ArrayAdapter<PlayersDataRow>)playersListView.getAdapter()).notifyDataSetChanged();
         ((ArrayAdapter<AddonsDataRow>)addonsListView.getAdapter()).notifyDataSetChanged();
     }
 }

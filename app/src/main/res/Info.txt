@@ -1,7 +1,0 @@
-Per testare in localhost:
--Usare la rete "enrico_wind3" sia sul telefono che sul computer;
--Disattivare il firewall del computer per precauzione (evitare che blocchi qualcosa perché gli tira);
--IP computer LAN: 192.168.1.175
--Porta a cui connettersi: 25575
--User: SerSapessi
--Password: Ciao

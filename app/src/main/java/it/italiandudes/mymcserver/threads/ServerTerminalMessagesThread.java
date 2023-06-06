@@ -11,6 +11,7 @@ import it.italiandudes.mymcserver.ConnectivitySingleton;
 import it.italiandudes.mymcserver.Constants;
 import it.italiandudes.mymcserver.R;
 import it.italiandudes.mymcserver.activities.TerminalActivity;
+import it.italiandudes.mymcserver.utils.exceptions.ServerInterruptedException;
 
 public class ServerTerminalMessagesThread extends Thread{
 
@@ -51,6 +52,12 @@ public class ServerTerminalMessagesThread extends Thread{
             Log.d(Constants.Log.TAG,"JSONException or IOException thrown after calling ConnectivitySingleton.getInstance().executeQueryHTTP() or ConnectivitySingleton.getInstance().getInteger() or ConnectivitySingleton.getInstance().getString() inside ServerTerminalMessageThread#run()");
             activity.runOnUiThread(()->{
                 Toast.makeText(activity,activity.getString(R.string.string_error),Toast.LENGTH_LONG).show();
+            });
+        }catch (ServerInterruptedException e){
+            ConnectivitySingleton.getInstance().resetConnectionAfterFailure();
+            Log.d(Constants.Log.TAG,"ServerInterruptedException thrown after calling ConnectivitySingleton.getInstance().executeQueryHTTP() inside ServerTerminalMessageThread#run()");
+            activity.runOnUiThread(()->{
+                Toast.makeText(activity,activity.getString(R.string.string_error_noserver),Toast.LENGTH_LONG).show();
             });
         }
     }

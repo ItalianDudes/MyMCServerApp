@@ -18,4 +18,5 @@
     <string name="string_error" translatable="true">A mistake might have occurred during the communication with the server</string>
     <string name="string_terminal_error" translatable="true">The commands can\'t be empty</string>
     <string name="string_terminal_slash_error" translatable="true">The commands don\'t need the initial /</string>
+    <string name="string_error_noserver" translatable="true">The server stopped responding to requests</string>
 </resources>

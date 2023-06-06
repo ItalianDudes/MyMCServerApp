@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:stretchColumns="*">
+    android:stretchColumns="*"
+    android:background="@color/activityBack">
     <TableRow>
 
         <LinearLayout
@@ -46,7 +47,8 @@
                     android:text="@string/string_info_section_cpu"
                     android:textAlignment="center"
                     android:textSize="25sp"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/texts"/>
                 <com.anychart.AnyChartView
                     android:id="@+id/cpuPieGraph"
                     android:layout_gravity="center_horizontal"
@@ -59,7 +61,8 @@
                     android:text="@string/string_info_section_ram"
                     android:textAlignment="center"
                     android:textSize="25sp"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/texts"/>
                 <com.anychart.AnyChartView
                     android:id="@+id/ramTotalToFreePieGraph"
                     android:layout_gravity="center_horizontal"
@@ -77,22 +80,28 @@
                     android:textSize="25sp"
                     android:textAlignment="center"
                     android:layout_marginBottom="10dp"
-                    android:text="@string/string_info_section_players"/>
+                    android:text="@string/string_info_section_players"
+                    android:textColor="@color/texts"/>
                 <ListView
                     android:id="@+id/playersList"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="25sp"
                     android:textAlignment="center"
                     android:layout_marginBottom="10dp"
-                    android:text="@string/string_info_section_addons"/>
+                    android:text="@string/string_info_section_addons"
+                    android:textColor="@color/texts"/>
                 <ListView
                     android:id="@+id/addonsList"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"/>
 
             </LinearLayout>
         </ScrollView>

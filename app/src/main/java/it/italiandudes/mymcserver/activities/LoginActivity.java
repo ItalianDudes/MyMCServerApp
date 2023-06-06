@@ -20,6 +20,7 @@ import it.italiandudes.mymcserver.Constants;
 import it.italiandudes.mymcserver.R;
 import it.italiandudes.mymcserver.inputfilters.MinMaxFilter;
 import it.italiandudes.mymcserver.inputfilters.MinMaxStringLengthFilter;
+import it.italiandudes.mymcserver.utils.exceptions.ServerInterruptedException;
 
 public class LoginActivity extends Activity {
 
@@ -52,12 +53,13 @@ public class LoginActivity extends Activity {
 
         new Thread(()->{
 
-            String ipAddress=ipEdTxt.getText().toString();
+            //TODO: must add a stricter input control with try catches
+            String ipAddress=ipEdTxt.getText().toString().trim();
             Log.d(Constants.Log.TAG,"PortEdText: "+((portEdTxt==null)?"null":portEdTxt));
             Log.d(Constants.Log.TAG,"PortEdText String: "+((portEdTxt.getText().toString()==null)?"null":portEdTxt.getText().toString()));
             int portNum = Integer.parseInt(portEdTxt.getText().toString());
-            String user = userEdTxt.getText().toString();
-            String pwd = pwdEdTxt.getText().toString();
+            String user = userEdTxt.getText().toString().trim();
+            String pwd = pwdEdTxt.getText().toString().trim();
 
             String sha512pwd = DigestUtils.sha512Hex(pwd);
 
@@ -100,6 +102,12 @@ public class LoginActivity extends Activity {
                 ConnectivitySingleton.getInstance().resetConnectionAfterFailure();
                 runOnUiThread(()->{
                     Toast.makeText(this,getString(R.string.string_error),Toast.LENGTH_LONG).show();
+                });
+            } catch (ServerInterruptedException e) {
+                ConnectivitySingleton.getInstance().resetConnectionAfterFailure();
+                Log.d(Constants.Log.TAG,"ServerInterruptedException thrown after calling ConnectivitySingleton.getInstance().executeQueryHTTP() inside ServerInfoThread#run()");
+                runOnUiThread(()->{
+                    Toast.makeText(this,getString(R.string.string_error_noserver),Toast.LENGTH_LONG).show();
                 });
             }
 

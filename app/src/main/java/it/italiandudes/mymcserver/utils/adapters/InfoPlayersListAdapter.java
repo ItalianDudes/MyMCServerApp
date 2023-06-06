@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -43,6 +44,7 @@ public class InfoPlayersListAdapter extends ArrayAdapter<PlayersDataRow> {
                 LayoutInflater inflater = LayoutInflater.from(getContext());
                 convertView = inflater.inflate(R.layout.item_info_lists, parent, false);
 
+                holder.cell1 = convertView.findViewById(R.id.cell1);
                 holder.cell1Txt = convertView.findViewById(R.id.first_cell_txt);
                 holder.cell1ImgView = convertView.findViewById(R.id.first_cell_imgview);
 
@@ -52,9 +54,12 @@ public class InfoPlayersListAdapter extends ArrayAdapter<PlayersDataRow> {
                 holder = (OneCellRowHolder) convertView.getTag();
             }
 
+            holder.cell1.setBackgroundResource(R.drawable.item_info_lists_back);
             holder.cell1Txt.setText(dataRow.getPlayer1().getName());
             if (dataRow.getPlayer1().isOnline()) {
                 holder.cell1ImgView.setBackgroundResource(R.drawable.baseline_check_circle_24);
+            }else{
+                holder.cell1ImgView.setBackgroundResource(R.drawable.baseline_cancel_24);
             }
         }else if(dataRow.getLength()==2) {
 
@@ -67,8 +72,10 @@ public class InfoPlayersListAdapter extends ArrayAdapter<PlayersDataRow> {
                 LayoutInflater inflater = LayoutInflater.from(getContext());
                 convertView = inflater.inflate(R.layout.item_info_lists, parent, false);
 
+                holder.cell1 = convertView.findViewById(R.id.cell1);
                 holder.cell1Txt = convertView.findViewById(R.id.first_cell_txt);
                 holder.cell1ImgView = convertView.findViewById(R.id.first_cell_imgview);
+                holder.cell2 = convertView.findViewById(R.id.cell2);
                 holder.cell2Txt = convertView.findViewById(R.id.second_cell_txt);
                 holder.cell2ImgView =convertView.findViewById(R.id.second_cell_imgview);
 
@@ -78,13 +85,19 @@ public class InfoPlayersListAdapter extends ArrayAdapter<PlayersDataRow> {
                 holder = (TwoCellsRowHolder) convertView.getTag();
             }
 
+            holder.cell1.setBackgroundResource(R.drawable.item_info_lists_back);
             holder.cell1Txt.setText(dataRow.getPlayer1().getName());
             if (dataRow.getPlayer1().isOnline()) {
                 holder.cell1ImgView.setBackgroundResource(R.drawable.baseline_check_circle_24);
+            }else{
+                holder.cell1ImgView.setBackgroundResource(R.drawable.baseline_cancel_24);
             }
+            holder.cell2.setBackgroundResource(R.drawable.item_info_lists_back);
             holder.cell2Txt.setText(dataRow.getPlayer2().getName());
             if (dataRow.getPlayer2().isOnline()) {
                 holder.cell2ImgView.setBackgroundResource(R.drawable.baseline_check_circle_24);
+            }else{
+                holder.cell2ImgView.setBackgroundResource(R.drawable.baseline_cancel_24);
             }
         }else if(dataRow.getLength()==3) {
             ThreeCellsRowHolder holder;
@@ -95,10 +108,13 @@ public class InfoPlayersListAdapter extends ArrayAdapter<PlayersDataRow> {
                 LayoutInflater inflater = LayoutInflater.from(getContext());
                 convertView = inflater.inflate(R.layout.item_info_lists, parent, false);
 
+                holder.cell1 = convertView.findViewById(R.id.cell1);
                 holder.cell1Txt = convertView.findViewById(R.id.first_cell_txt);
                 holder.cell1ImgView = convertView.findViewById(R.id.first_cell_imgview);
+                holder.cell2 = convertView.findViewById(R.id.cell2);
                 holder.cell2Txt = convertView.findViewById(R.id.second_cell_txt);
                 holder.cell2ImgView =convertView.findViewById(R.id.second_cell_imgview);
+                holder.cell3 = convertView.findViewById(R.id.cell3);
                 holder.cell3Txt = convertView.findViewById(R.id.third_cell_txt);
                 holder.cell3ImgView = convertView.findViewById(R.id.third_cell_imgview);
 
@@ -108,17 +124,26 @@ public class InfoPlayersListAdapter extends ArrayAdapter<PlayersDataRow> {
                 holder = (ThreeCellsRowHolder) convertView.getTag();
             }
 
+            holder.cell1.setBackgroundResource(R.drawable.item_info_lists_back);
             holder.cell1Txt.setText(dataRow.getPlayer1().getName());
             if (dataRow.getPlayer1().isOnline()) {
                 holder.cell1ImgView.setBackgroundResource(R.drawable.baseline_check_circle_24);
+            }else{
+                holder.cell1ImgView.setBackgroundResource(R.drawable.baseline_cancel_24);
             }
+            holder.cell2.setBackgroundResource(R.drawable.item_info_lists_back);
             holder.cell2Txt.setText(dataRow.getPlayer2().getName());
             if (dataRow.getPlayer2().isOnline()) {
                 holder.cell2ImgView.setBackgroundResource(R.drawable.baseline_check_circle_24);
+            }else{
+                holder.cell2ImgView.setBackgroundResource(R.drawable.baseline_cancel_24);
             }
+            holder.cell3.setBackgroundResource(R.drawable.item_info_lists_back);
             holder.cell3Txt.setText(dataRow.getPlayer3().getName());
             if (dataRow.getPlayer3().isOnline()) {
                 holder.cell3ImgView.setBackgroundResource(R.drawable.baseline_check_circle_24);
+            }else{
+                holder.cell3ImgView.setBackgroundResource(R.drawable.baseline_cancel_24);
             }
         }else{
             FourCellsRowHolder holder;
@@ -129,12 +154,16 @@ public class InfoPlayersListAdapter extends ArrayAdapter<PlayersDataRow> {
                 LayoutInflater inflater = LayoutInflater.from(getContext());
                 convertView = inflater.inflate(R.layout.item_info_lists, parent, false);
 
+                holder.cell1 = convertView.findViewById(R.id.cell1);
                 holder.cell1Txt = convertView.findViewById(R.id.first_cell_txt);
                 holder.cell1ImgView = convertView.findViewById(R.id.first_cell_imgview);
+                holder.cell2 = convertView.findViewById(R.id.cell2);
                 holder.cell2Txt = convertView.findViewById(R.id.second_cell_txt);
                 holder.cell2ImgView =convertView.findViewById(R.id.second_cell_imgview);
+                holder.cell3 = convertView.findViewById(R.id.cell3);
                 holder.cell3Txt = convertView.findViewById(R.id.third_cell_txt);
                 holder.cell3ImgView = convertView.findViewById(R.id.third_cell_imgview);
+                holder.cell4 = convertView.findViewById(R.id.cell4);
                 holder.cell4Txt = convertView.findViewById(R.id.fourth_cell_txt);
                 holder.cell4ImgView = convertView.findViewById(R.id.fourth_cell_imgview);
 
@@ -144,21 +173,33 @@ public class InfoPlayersListAdapter extends ArrayAdapter<PlayersDataRow> {
                 holder = (FourCellsRowHolder) convertView.getTag();
             }
 
+            holder.cell1.setBackgroundResource(R.drawable.item_info_lists_back);
             holder.cell1Txt.setText(dataRow.getPlayer1().getName());
             if (dataRow.getPlayer1().isOnline()) {
                 holder.cell1ImgView.setBackgroundResource(R.drawable.baseline_check_circle_24);
+            }else{
+                holder.cell1ImgView.setBackgroundResource(R.drawable.baseline_cancel_24);
             }
+            holder.cell2.setBackgroundResource(R.drawable.item_info_lists_back);
             holder.cell2Txt.setText(dataRow.getPlayer2().getName());
             if (dataRow.getPlayer2().isOnline()) {
                 holder.cell2ImgView.setBackgroundResource(R.drawable.baseline_check_circle_24);
+            }else{
+                holder.cell2ImgView.setBackgroundResource(R.drawable.baseline_cancel_24);
             }
+            holder.cell3.setBackgroundResource(R.drawable.item_info_lists_back);
             holder.cell3Txt.setText(dataRow.getPlayer3().getName());
             if (dataRow.getPlayer3().isOnline()) {
                 holder.cell3ImgView.setBackgroundResource(R.drawable.baseline_check_circle_24);
+            }else{
+                holder.cell3ImgView.setBackgroundResource(R.drawable.baseline_cancel_24);
             }
+            holder.cell4.setBackgroundResource(R.drawable.item_info_lists_back);
             holder.cell4Txt.setText(dataRow.getPlayer4().getName());
             if (dataRow.getPlayer4().isOnline()) {
                 holder.cell4ImgView.setBackgroundResource(R.drawable.baseline_check_circle_24);
+            }else{
+                holder.cell4ImgView.setBackgroundResource(R.drawable.baseline_cancel_24);
             }
         }
 
@@ -166,33 +207,43 @@ public class InfoPlayersListAdapter extends ArrayAdapter<PlayersDataRow> {
     }
 
     private static class OneCellRowHolder{
+        public LinearLayout cell1;
         public TextView cell1Txt;
         public ImageView cell1ImgView;
     }
 
     private static class TwoCellsRowHolder{
+        public LinearLayout cell1;
         public TextView cell1Txt;
         public ImageView cell1ImgView;
+        public LinearLayout cell2;
         public TextView cell2Txt;
         public ImageView cell2ImgView;
     }
 
     private static class ThreeCellsRowHolder{
+        public LinearLayout cell1;
         public TextView cell1Txt;
         public ImageView cell1ImgView;
+        public LinearLayout cell2;
         public TextView cell2Txt;
         public ImageView cell2ImgView;
+        public LinearLayout cell3;
         public TextView cell3Txt;
         public ImageView cell3ImgView;
     }
 
     private static class FourCellsRowHolder{
+        public LinearLayout cell1;
         public TextView cell1Txt;
         public ImageView cell1ImgView;
+        public LinearLayout cell2;
         public TextView cell2Txt;
         public ImageView cell2ImgView;
+        public LinearLayout cell3;
         public TextView cell3Txt;
         public ImageView cell3ImgView;
+        public LinearLayout cell4;
         public TextView cell4Txt;
         public ImageView cell4ImgView;
     }

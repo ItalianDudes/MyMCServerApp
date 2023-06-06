@@ -12,6 +12,7 @@ import it.italiandudes.mymcserver.ConnectivitySingleton;
 import it.italiandudes.mymcserver.Constants;
 import it.italiandudes.mymcserver.R;
 import it.italiandudes.mymcserver.activities.InfoActivity;
+import it.italiandudes.mymcserver.utils.exceptions.ServerInterruptedException;
 import it.italiandudes.mymcserver.utils.models.Addon;
 import it.italiandudes.mymcserver.utils.models.AddonsDataRow;
 import it.italiandudes.mymcserver.utils.models.Player;
@@ -25,7 +26,6 @@ public class ServerInfoThread extends Thread{
     public ServerInfoThread(InfoActivity activity){
         this.activity=activity;
         isInterrupted=false;
-        setDaemon(true);
     }
 
     @Override
@@ -53,6 +53,7 @@ public class ServerInfoThread extends Thread{
                     activity.runOnUiThread(()->{
                         activity.drawCPUGraph(systemCPULoad,processCPULoad);
                         activity.drawRAMGraphs(totalMemory,freeMemory,committedVirtualMemory);
+                        activity.clearListViews();
                     });
 
                     Log.d(Constants.Log.TAG,"CPU and RAM graphs loaded");
@@ -61,22 +62,21 @@ public class ServerInfoThread extends Thread{
                     boolean exit=false;
                     int i=0;
                     Log.d(Constants.Log.TAG,"Players loaded");
-                    Thread.sleep(Constants.Connectivity.THREAD_SLEEP_INFO);
                     while(!exit){
                         int j=0;
                         PlayersDataRow dataRow;
                         Player p1 = new Player(players.getJSONObject(i+j).getString(Constants.Protocol.HTTP_Headers.NAME),players.getJSONObject(i+j).getBoolean(Constants.Protocol.HTTP_Headers.ONLINE));
+                        j++;
                         if((i+j)<players.length()){
-                            j++;
                             Player p2 = new Player(players.getJSONObject(i+j).getString(Constants.Protocol.HTTP_Headers.NAME),players.getJSONObject(i+j).getBoolean(Constants.Protocol.HTTP_Headers.ONLINE));
+                            j++;
                             if((i+j)<players.length()){
-                                j++;
                                 Player p3 = new Player(players.getJSONObject(i+j).getString(Constants.Protocol.HTTP_Headers.NAME),players.getJSONObject(i+j).getBoolean(Constants.Protocol.HTTP_Headers.ONLINE));
+                                j++;
                                 if((i+j)<players.length()){
-                                    j++;
                                     Player p4 = new Player(players.getJSONObject(i+j).getString(Constants.Protocol.HTTP_Headers.NAME),players.getJSONObject(i+j).getBoolean(Constants.Protocol.HTTP_Headers.ONLINE));
+                                    j++;
                                     if((i+j)<players.length()){
-                                        j++;
                                         i+=j;
                                     }else{
                                         exit=true;
@@ -109,17 +109,17 @@ public class ServerInfoThread extends Thread{
                         int j=0;
                         AddonsDataRow dataRow;
                         Addon a1 = new Addon(addons.getJSONObject(i+j).getString(Constants.Protocol.HTTP_Headers.NAME),addons.getJSONObject(i+j).getBoolean(Constants.Protocol.HTTP_Headers.ENABLED));
+                        j++;
                         if((i+j)<players.length()){
-                            j++;
                             Addon a2 = new Addon(addons.getJSONObject(i+j).getString(Constants.Protocol.HTTP_Headers.NAME),addons.getJSONObject(i+j).getBoolean(Constants.Protocol.HTTP_Headers.ENABLED));
+                            j++;
                             if((i+j)<players.length()){
-                                j++;
                                 Addon a3 = new Addon(addons.getJSONObject(i+j).getString(Constants.Protocol.HTTP_Headers.NAME),addons.getJSONObject(i+j).getBoolean(Constants.Protocol.HTTP_Headers.ENABLED));
+                                j++;
                                 if((i+j)<players.length()){
-                                    j++;
                                     Addon a4 = new Addon(addons.getJSONObject(i+j).getString(Constants.Protocol.HTTP_Headers.NAME),addons.getJSONObject(i+j).getBoolean(Constants.Protocol.HTTP_Headers.ENABLED));
+                                    j++;
                                     if((i+j)<players.length()){
-                                        j++;
                                         i+=j;
                                     }else{
                                         exit=true;
@@ -146,7 +146,7 @@ public class ServerInfoThread extends Thread{
                     Log.d(Constants.Log.TAG,"Addons List loaded");
                     Log.d(Constants.Log.TAG,"All info loaded");
 
-                    Thread.sleep(Constants.Connectivity.THREAD_SLEEP_INFO);
+
                 }else{
                     //Print error message
                     ConnectivitySingleton.getInstance().resetConnectionAfterFailure();
@@ -159,15 +159,26 @@ public class ServerInfoThread extends Thread{
             } catch (IOException | JSONException e) {
                 ConnectivitySingleton.getInstance().resetConnectionAfterFailure();
                 Log.d(Constants.Log.TAG,"JSONException or IOException thrown after calling ConnectivitySingleton.getInstance().executeQueryHTTP() or ConnectivitySingleton.getInstance().getInteger() or ConnectivitySingleton.getInstance().getString() inside ServerInfoThread#run()");
+                e.printStackTrace();
                 activity.runOnUiThread(()->{
                     Toast.makeText(activity,activity.getString(R.string.string_error),Toast.LENGTH_LONG).show();
                 });
-            } catch (InterruptedException e) {
+            } catch (ServerInterruptedException e) {
                 ConnectivitySingleton.getInstance().resetConnectionAfterFailure();
-                Log.d(Constants.Log.TAG,"InterruptedException thrown after calling Thread.sleep() inside ServerInfoThread#run()");
+                Log.d(Constants.Log.TAG,"ServerInterruptedException thrown after calling ConnectivitySingleton.getInstance().executeQueryHTTP() inside ServerInfoThread#run()");
                 activity.runOnUiThread(()->{
-                    Toast.makeText(activity,activity.getString(R.string.string_error),Toast.LENGTH_LONG).show();
+                    Toast.makeText(activity,activity.getString(R.string.string_error_noserver),Toast.LENGTH_LONG).show();
                 });
+            }finally {
+                try {
+                    Thread.sleep(Constants.Connectivity.THREAD_SLEEP_INFO);
+                } catch (InterruptedException e) {
+                    ConnectivitySingleton.getInstance().resetConnectionAfterFailure();
+                    Log.d(Constants.Log.TAG,"InterruptedException thrown after calling Thread.sleep() inside ServerInfoThread#run()");
+                    activity.runOnUiThread(()->{
+                        Toast.makeText(activity,activity.getString(R.string.string_error),Toast.LENGTH_LONG).show();
+                    });
+                }
             }
         }
 

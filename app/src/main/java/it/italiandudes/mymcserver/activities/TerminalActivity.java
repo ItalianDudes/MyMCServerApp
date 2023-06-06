@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import it.italiandudes.mymcserver.R;
 import it.italiandudes.mymcserver.threads.ServerTerminalMessagesThread;
+import it.italiandudes.mymcserver.utils.adapters.TerminalMessagesAdapter;
 
 public class TerminalActivity extends Activity {
 
@@ -28,7 +29,7 @@ public class TerminalActivity extends Activity {
         terminalEdTxt = findViewById(R.id.terminalEdTxt);
         terminalView = findViewById(R.id.terminalView);
         terminalContent = new ArrayList<>();
-        terminalView.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,terminalContent));
+        terminalView.setAdapter(new TerminalMessagesAdapter(getApplicationContext(),terminalContent));
     }
 
     public void toInfo(View view){

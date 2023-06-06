@@ -9,60 +9,64 @@
         android:layout_height="wrap_content"
         android:weightSum="4">
         <LinearLayout
+            android:id="@+id/cell1"
             android:orientation="vertical"
             android:layout_weight="1">
             <TextView
                 android:id="@+id/first_cell_txt"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:textColor="@color/texts"/>
             <ImageView
                 android:id="@+id/first_cell_imgview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:contentDescription="" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/cell2"
             android:orientation="vertical"
             android:layout_weight="1">
             <TextView
                 android:id="@+id/second_cell_txt"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:textColor="@color/texts"/>
             <ImageView
                 android:id="@+id/second_cell_imgview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:contentDescription="" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/cell3"
             android:orientation="vertical"
             android:layout_weight="1">
 
             <TextView
                 android:id="@+id/third_cell_txt"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:textColor="@color/texts"/>
             <ImageView
                 android:id="@+id/third_cell_imgview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:contentDescription="" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/cell4"
             android:orientation="vertical"
             android:layout_weight="1">
 
             <TextView
                 android:id="@+id/fourth_cell_txt"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:textColor="@color/texts"/>
             <ImageView
                 android:id="@+id/fourth_cell_imgview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:contentDescription="" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
         </LinearLayout>
     </TableRow>

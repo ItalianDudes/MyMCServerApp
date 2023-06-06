@@ -2,7 +2,8 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/activityBack">
 
 
     <TextView
@@ -13,7 +14,8 @@
         android:textSize="30sp"
         android:layout_marginTop="20dp"
         android:layout_alignParentStart="true"
-        android:id="@+id/loginAppTitle"/>
+        android:id="@+id/loginAppTitle"
+        android:textColor="@color/texts"/>
 
     <!--TODO: remember input filter-->
     <TableLayout
@@ -33,7 +35,8 @@
                 android:layout_width="wrap_content"
                 android:text="@string/string_title_login"
                 android:textSize="25sp"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:textColor="@color/texts"/>
         </TableRow>
 
         <TableRow
@@ -44,14 +47,16 @@
                 android:text="@string/string_form_ip"
                 android:textSize="20sp"
                 android:layout_column="0"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:textColor="@color/texts"/>
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="@string/string_form_port"
                 android:textSize="20sp"
                 android:layout_column="1"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:textColor="@color/texts"/>
         </TableRow>
         <TableRow
             android:gravity="center_horizontal">
@@ -60,7 +65,9 @@
                 android:hint="@string/string_login_form_ip_example"
                 android:textAlignment="textEnd"
                 android:padding="5dp"
-                android:id="@+id/login_form_ip"/>
+                android:id="@+id/login_form_ip"
+                android:textColor="@color/texts"
+                android:textColorHint="@color/hintTexts"/>
 
             <EditText
                 android:layout_width="22dp"
@@ -70,7 +77,9 @@
                 android:inputType="number"
                 android:padding="5dp"
                 android:textAlignment="textEnd"
-                android:id="@+id/login_form_port"/>
+                android:id="@+id/login_form_port"
+                android:textColor="@color/texts"
+                android:textColorHint="@color/hintTexts"/>
         </TableRow>
         <TableRow
             android:gravity="center_horizontal">
@@ -78,7 +87,7 @@
                 android:textAlignment="center"
                 android:text="@string/string_form_user"
                 android:textSize="20sp"
-                />
+                android:textColor="@color/texts"/>
         </TableRow>
         <TableRow
             android:gravity="center">
@@ -87,14 +96,17 @@
                 android:padding="5dp"
                 android:hint="@string/string_login_form_user_example"
                 android:textAlignment="center"
-                android:id="@+id/login_form_user"/>
+                android:id="@+id/login_form_user"
+                android:textColor="@color/texts"
+                android:textColorHint="@color/hintTexts"/>
         </TableRow>
         <TableRow
             android:gravity="center_horizontal">
             <TextView
                 android:textAlignment="center"
                 android:text="@string/string_form_pwd"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                android:textColor="@color/texts"/>
         </TableRow>
         <TableRow
             android:gravity="center_horizontal">
@@ -103,7 +115,9 @@
                 android:padding="5dp"
                 android:textAlignment="center"
                 android:inputType="textPassword"
-                android:id="@+id/login_form_pwd"/>
+                android:id="@+id/login_form_pwd"
+                android:textColor="@color/texts"
+                android:textColorHint="@color/hintTexts"/>
         </TableRow>
         <TableRow
             android:gravity="center_horizontal">
