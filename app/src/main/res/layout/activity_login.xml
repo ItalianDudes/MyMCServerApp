@@ -15,6 +15,7 @@
         android:layout_marginTop="20dp"
         android:layout_alignParentStart="true"
         android:id="@+id/loginAppTitle"
+        android:textStyle="bold"
         android:textColor="@color/texts"/>
 
     <!--TODO: remember input filter-->

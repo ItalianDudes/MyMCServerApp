@@ -28,4 +28,6 @@
     <string name="string_terminal_error" translatable="true">I comandi non possono essere vuoti</string>
     <string name="string_terminal_slash_error" translatable="true">I comandi non necessitano dello / iniziale</string>
     <string name="string_error_noserver" translatable="true">Il server ha smesso di rispondere</string>
+    <string name="string_login_error_no_username" translatable="true">Non è stato inserito un nome utente</string>
+    <string name="string_login_error_no_pwd" translatable="true">Non è stata inserita una password</string>
 </resources>

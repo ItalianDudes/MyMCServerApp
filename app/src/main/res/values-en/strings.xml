@@ -19,4 +19,6 @@
     <string name="string_terminal_error" translatable="true">The commands can\'t be empty</string>
     <string name="string_terminal_slash_error" translatable="true">The commands don\'t need the initial /</string>
     <string name="string_error_noserver" translatable="true">The server stopped responding to requests</string>
+    <string name="string_login_error_no_username" translatable="true">No username has been entered</string>
+    <string name="string_login_error_no_pwd" translatable="true">No password has been entered</string>
 </resources>

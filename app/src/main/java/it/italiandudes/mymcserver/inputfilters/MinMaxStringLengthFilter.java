@@ -5,6 +5,7 @@ import android.text.Spanned;
 import android.util.Log;
 
 import it.italiandudes.mymcserver.Constants;
+import it.italiandudes.mymcserver.utils.exceptions.NameTooLongException;
 
 public class MinMaxStringLengthFilter implements InputFilter {
 
@@ -25,7 +26,7 @@ public class MinMaxStringLengthFilter implements InputFilter {
             if(input.length()<max && input.length()>min){
                 return null;
             }
-        }catch(NumberFormatException exception){}
+        }catch(NameTooLongException exception){}
 
         return "";
     }

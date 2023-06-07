@@ -53,65 +53,84 @@ public class LoginActivity extends Activity {
 
         new Thread(()->{
 
-            //TODO: must add a stricter input control with try catches
-            String ipAddress=ipEdTxt.getText().toString().trim();
+            String ipAddress;
+            int portNum;
+            String user;
+            String pwd;
+
+            ipAddress =ipEdTxt.getText().toString().trim();
             Log.d(Constants.Log.TAG,"PortEdText: "+((portEdTxt==null)?"null":portEdTxt));
             Log.d(Constants.Log.TAG,"PortEdText String: "+((portEdTxt.getText().toString()==null)?"null":portEdTxt.getText().toString()));
-            int portNum = Integer.parseInt(portEdTxt.getText().toString());
-            String user = userEdTxt.getText().toString().trim();
-            String pwd = pwdEdTxt.getText().toString().trim();
 
-            String sha512pwd = DigestUtils.sha512Hex(pwd);
 
-            ConnectivitySingleton.getInstance().setURL(ipAddress,portNum);
-            ConnectivitySingleton.getInstance().setPath(Constants.Connectivity.LOGIN);
-            ConnectivitySingleton.getInstance().setHTTPHeader(Constants.Protocol.HTTP_Headers.MMCS_USERNAME,user);
+            if(portEdTxt.getText().toString().isBlank()){
+                portNum=Constants.Connectivity.DEFAULT_PORT;
+            }else{
+                portNum = Integer.parseInt(portEdTxt.getText().toString());
+            }
+            user = userEdTxt.getText().toString().trim();
+            if(user.isBlank()){
+                Toast.makeText(this,getString(R.string.string_login_error_no_username),Toast.LENGTH_LONG).show();
+                userEdTxt.setBackgroundResource(R.drawable.edtext_back_error);
+            }else{
+                userEdTxt.setBackgroundResource(R.drawable.edtext_login_back_sel);
+                pwd = pwdEdTxt.getText().toString().trim();
 
-            //ConnectivitySingleton.getInstance().setHTTPHeader(Constants.Protocol.HTTP_Headers.MMCS_PWD,sha512pwd);
-            ConnectivitySingleton.getInstance().setHTTPHeader(Constants.Protocol.HTTP_Headers.MMCS_PWD,sha512pwd);
+                if(pwd.isBlank()){
+                    Toast.makeText(this,getString(R.string.string_login_error_no_pwd),Toast.LENGTH_LONG).show();
+                }else{
+                    pwdEdTxt.setBackgroundResource(R.drawable.edtext_login_back_sel);
+                    String sha512pwd = DigestUtils.sha512Hex(pwd);
 
-            try {
-                ConnectivitySingleton.getInstance().executeQueryHTTP();
+                    ConnectivitySingleton.getInstance().setURL(ipAddress,portNum);
+                    ConnectivitySingleton.getInstance().setPath(Constants.Connectivity.LOGIN);
+                    ConnectivitySingleton.getInstance().setHTTPHeader(Constants.Protocol.HTTP_Headers.MMCS_USERNAME,user);
 
-                try {
-                    if(ConnectivitySingleton.getInstance().getInteger(Constants.Protocol.HTTP_Headers.RETURN_CODE)==Constants.Protocol.ReturnCodes.HTTP_OK){
-                        ConnectivitySingleton.getInstance().setToken(ConnectivitySingleton.getInstance().getString(Constants.Protocol.HTTP_Headers.TOKEN));
-                        Log.d(Constants.Log.TAG,"HTTP code returned: "+ConnectivitySingleton.getInstance().getInteger(Constants.Protocol.HTTP_Headers.RETURN_CODE));
-                        runOnUiThread(()->{
-                            //TODO: lanciare tutte le operazioni necessarie per caricare il collegamento al server, e poi fare il login
-                            Intent switchActivity = new Intent(this,TerminalActivity.class);
-                            startActivity(switchActivity);
-                        });
-                    }else{
-                        //Other codes returned
-                        Log.d(Constants.Log.TAG,"HTTP code returned: "+ConnectivitySingleton.getInstance().getInteger(Constants.Protocol.HTTP_Headers.RETURN_CODE));
+                    //ConnectivitySingleton.getInstance().setHTTPHeader(Constants.Protocol.HTTP_Headers.MMCS_PWD,sha512pwd);
+                    ConnectivitySingleton.getInstance().setHTTPHeader(Constants.Protocol.HTTP_Headers.MMCS_PWD,sha512pwd);
+
+                    try {
+                        ConnectivitySingleton.getInstance().executeQueryHTTP();
+
+                        try {
+                            if(ConnectivitySingleton.getInstance().getInteger(Constants.Protocol.HTTP_Headers.RETURN_CODE)==Constants.Protocol.ReturnCodes.HTTP_OK){
+                                ConnectivitySingleton.getInstance().setToken(ConnectivitySingleton.getInstance().getString(Constants.Protocol.HTTP_Headers.TOKEN));
+                                Log.d(Constants.Log.TAG,"HTTP code returned: "+ConnectivitySingleton.getInstance().getInteger(Constants.Protocol.HTTP_Headers.RETURN_CODE));
+                                runOnUiThread(()->{
+                                    //TODO: lanciare tutte le operazioni necessarie per caricare il collegamento al server, e poi fare il login
+                                    Intent switchActivity = new Intent(this,TerminalActivity.class);
+                                    startActivity(switchActivity);
+                                });
+                            }else{
+                                //Other codes returned
+                                Log.d(Constants.Log.TAG,"HTTP code returned: "+ConnectivitySingleton.getInstance().getInteger(Constants.Protocol.HTTP_Headers.RETURN_CODE));
+                                ConnectivitySingleton.getInstance().resetConnectionAfterFailure();
+                                runOnUiThread(()->{
+                                    Toast.makeText(this,getString(R.string.string_error),Toast.LENGTH_LONG).show();
+                                });
+                            }
+                        } catch (JSONException e) {
+                            Log.d(Constants.Log.TAG,"JSONException thrown after calling ConnectivitySingleton.getInstance().getInteger() inside LoginActivity#logIn()\n"+e);
+                            ConnectivitySingleton.getInstance().resetConnectionAfterFailure();
+                            runOnUiThread(()->{
+                                Toast.makeText(this,getString(R.string.string_error),Toast.LENGTH_LONG).show();
+                            });
+                        }
+                    } catch (IOException | JSONException e) {
+                        Log.d(Constants.Log.TAG,"IOException or JSONException thrown after calling Connectivity.getInstance().executeQueryHTTP() inside LoginActivity#logIn()\n"+e);
                         ConnectivitySingleton.getInstance().resetConnectionAfterFailure();
                         runOnUiThread(()->{
                             Toast.makeText(this,getString(R.string.string_error),Toast.LENGTH_LONG).show();
                         });
+                    } catch (ServerInterruptedException e) {
+                        ConnectivitySingleton.getInstance().resetConnectionAfterFailure();
+                        Log.d(Constants.Log.TAG,"ServerInterruptedException thrown after calling ConnectivitySingleton.getInstance().executeQueryHTTP() inside ServerInfoThread#run()");
+                        runOnUiThread(()->{
+                            Toast.makeText(this,getString(R.string.string_error_noserver),Toast.LENGTH_LONG).show();
+                        });
                     }
-                } catch (JSONException e) {
-                    Log.d(Constants.Log.TAG,"JSONException thrown after calling ConnectivitySingleton.getInstance().getInteger() inside LoginActivity#logIn()\n"+e);
-                    ConnectivitySingleton.getInstance().resetConnectionAfterFailure();
-                    runOnUiThread(()->{
-                        Toast.makeText(this,getString(R.string.string_error),Toast.LENGTH_LONG).show();
-                    });
                 }
-            } catch (IOException | JSONException e) {
-                Log.d(Constants.Log.TAG,"IOException or JSONException thrown after calling Connectivity.getInstance().executeQueryHTTP() inside LoginActivity#logIn()\n"+e);
-                ConnectivitySingleton.getInstance().resetConnectionAfterFailure();
-                runOnUiThread(()->{
-                    Toast.makeText(this,getString(R.string.string_error),Toast.LENGTH_LONG).show();
-                });
-            } catch (ServerInterruptedException e) {
-                ConnectivitySingleton.getInstance().resetConnectionAfterFailure();
-                Log.d(Constants.Log.TAG,"ServerInterruptedException thrown after calling ConnectivitySingleton.getInstance().executeQueryHTTP() inside ServerInfoThread#run()");
-                runOnUiThread(()->{
-                    Toast.makeText(this,getString(R.string.string_error_noserver),Toast.LENGTH_LONG).show();
-                });
             }
-
-
         }).start();
     }
 }

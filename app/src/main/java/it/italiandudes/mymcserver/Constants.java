@@ -9,6 +9,7 @@ public final class Constants {
         public static final String COMMAND = "command";
         public static final String STATS = "stats";
         public static final int THREAD_SLEEP_INFO = 10000;
+        public static final int DEFAULT_PORT = 25575;
     }
 
     public final static class Protocol{
